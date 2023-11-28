@@ -93,42 +93,5 @@
 							</section>
 
 
-
-							<div class="card product-list">
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Barcode</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                <tr>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->name}}</td>
-                    {{-- <td><img class="product-img" src="{{ asset('storage/' . $product->image) }}" alt=""></td>                    <td><img class="product-img" src="{{ Storage::url('app/' . $product->image) }}" alt=""></td> --}}
-                    <td><img class="product-img" src="{{ Storage::url('public/' . $product->image) }}" alt=""></td>
-
-                    <td>{{$product->barcode}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->quantity}}</td>
-
-                    
-                    
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {{ $products->render()}}
-    </div>
-</div>
+							
 @endsection
