@@ -1,22 +1,32 @@
 @extends('layouts.menu')
 
 @section('content')
+
+
 <!-- Vacations -->
 <section class="tiles">
-								<article class="style1">
+	<div >
+
+	@foreach ($products as $product)
+								<div class="productActive">
 									<span class="image">
-										<img src="{{('images/product-1-720x480.jpg') }}" alt="" />
+										<img src="{{ Storage::url('public/' . $product->image) }}" alt="" />
 									</span>
 									<a href="#">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
+										<h2>{{$product->name}}</h2>
 										
-										<p><del>$11.00</del> <strong> $9.95</strong></p>
+										<p><strong>{{$product->price}}</strong></p>
 
 										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, aspernatur?
+											{{$product->description}}
 		                                </p>
 									</a>
-								</article>
+								</div>
+	@endforeach
+	</div>
+
+	{{ $products->render()}}
+<!-- 								
 								<article class="style2">
 									<span class="image">
 										<img src="{{('images/product-2-720x480.jpg') }}" alt="" />
@@ -89,7 +99,7 @@
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, quod.
 		                                </p>
 									</a>
-								</article>
+								</article> -->
 							</section>
 
 
