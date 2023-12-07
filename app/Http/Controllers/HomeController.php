@@ -26,6 +26,5 @@ class HomeController extends Controller
     {
         $products = Product::latest()->paginate(10);
         return view('home')->with('products',$products);
-        //return view('home');
     }
 }

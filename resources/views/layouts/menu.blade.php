@@ -15,45 +15,60 @@
 				<!-- Header -->
                 <header id="header">
                     <div class="inner d-flex justify-content-between align-items-center">
-                        <!-- Logo -->
-                        <div class="sm:fixed sm:top-0 sm:left-0 p-6 text-left z-10">
+                        <!-- Left link-->
+                        <div class="left-links">
                             <a href="{{ route('homepage') }}" class="logo">
-                                <span class="fa fa-cutlery"></span> <span class="title">Canteen Website</span>
+                                <span class="fa fa-cutlery"></span> <span class="title">CanteenUS</span>
                             </a>
                         </div>
-                        @if (Route::has('login'))
-                            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                @auth
-                                    <a href="{{ url('/home') }}" class="logo">
-                                        <span class="title">Home</span>
-                                    </a>
-                                @else
-                                    <a href="{{ route('login') }}" class="logo">
-                                        <span class="title">Log in</span>
-                                    </a>
+						<!-- Right link-->
+						<div class="right-links">
+							<div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+								<a href="{{ route('homepage') }}" class="logo">
+                            		<span class="title">Menu</span>
+                        		</a>
 
-                                    <span class='logo'>|</span>
+								<span class='logo'>|</span>
+								<a href="{{ route('homepage') }}" class="logo">
+                            		<span class="title">Wheel of fortune</span>
+                        		</a>
 
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="logo">
-                                            <span class="title">Register</span>
-                                        </a>
-                                    @endif
-                                @endauth
-                            </div>
-                        @endif
+								<span class='logo'>|</span>
+								@if (Route::has('login'))
+									@auth
+										<a href="{{ url('/admin') }}" class="logo">
+											<span class="title">Home</span>
+									</a>
+									@else
+										<a href="{{ route('login') }}" class="logo">
+											<span class="title">Log in</span>
+										</a>
+
+										<span class='logo'>|</span>
+										@if (Route::has('register'))
+											<a href="{{ route('register') }}" class="logo">
+												<span class="title">Register</span>
+											</a>
+										@endif
+									@endauth
+									
+								@endif
+								<span class='logo'>|</span>
+								<a href="{{ route('homepage') }}" class="logo">
+                            		<span class="title">Cart</span>
+                        		</a>
+							</div>
+						</div>     
                     </div>
                 </header>
 
 				<!-- Main -->
 					<div id="main">
+						<div class="image main">
+							<img src="{{('images/banner-image-5-1920x500.jpg') }}" class="img-fluid" alt="" />
+						</div>
+
 						<div class="inner">
-							<h1>Menu</h1>
-
-							<div class="image main">
-								<img src="{{('images/banner-image-5-1920x500.jpg') }}" class="img-fluid" alt="" />
-							</div>
-
 							@yield('content')
 						</div>
 					</div>
