@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
+    Route::get('/{id}', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
 });
 
 Route::prefix('admin')->group(function () {
