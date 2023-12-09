@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Register') }}</p>
+        <p class="login-box-msg">{{ __('Đăng kí') }}</p>
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div class="input-group mb-3">
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                       placeholder="{{ __('Name') }}" required autocomplete="name" autofocus>
+                       placeholder="{{ __('Họ Tên') }}" required autocomplete="name" autofocus>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -39,7 +39,7 @@
 
             <div class="input-group mb-3">
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                       placeholder="{{ __('Password') }}" required autocomplete="new-password">
+                       placeholder="{{ __('Mật khẩu') }}" required autocomplete="new-password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -55,7 +55,7 @@
             <div class="input-group mb-3">
                 <input type="password" name="password_confirmation"
                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                       placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password">
+                       placeholder="{{ __('Xác nhận mật khẩu') }}" required autocomplete="new-password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col-12">
                     <button type="submit"
-                            class="btn btn-primary btn-block">{{ __('Register') }}</button>
+                            class="btn btn-primary btn-block">{{ __('Đăng kí') }}</button>
                 </div>
             </div>
         </form>

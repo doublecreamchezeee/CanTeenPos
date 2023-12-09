@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title','Product List')
-@section('content-header','Product List')
+@section('title','Receipt List')
+@section('content-header','Receipt List')
 
 
 @section('content-actions')
-<a href="{{route('products.create')}}" class="btn btn-primary">Create</a>
+<a href="{{route('receipts.create')}}" class="btn btn-primary">Create</a>
 @endsection
 
 @section('styles')
@@ -13,48 +13,41 @@
 @endsection
 
 @section('content')
-<div class="card product-list">
+
+<div class="card receipt-list">
     <div class="card-body">
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Barcode</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Actions</th>
+                    <th>Total cost</th>
+                    <th>List product</th>
+                    <th>Payment type</th>
+                    <th>Status</th>
                     <th>Created At</th>
-                    <th>Updated At</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
+                @foreach ($receipts as $receipt)
                 <tr>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->name}}</td>
-                    {{-- <td><img class="product-img" src="{{ asset('storage/' . $product->image) }}" alt=""></td>                    
-                    <td><img class="product-img" src="{{ Storage::url('app/' . $product->image) }}" alt=""></td> --}}
-                    <td><img class="product-img" src="{{ Storage::url('public/' . $product->image) }}" alt=""></td>
-                    <td>{{$product->barcode}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->quantity}}</td>
+                    <td>{{$receipt->id}}</td>
+                    <td>{{$receipt->total_cost}}</td>
+                    <td>KKK</td>
+                    <td>{{$receipt->payment_type}}</td>
 
                     <td>
-                        <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}">{{$product->status ? 'Active' : 'Inactive'}}</span>
+                        <span class="right badge badge-{{ $receipt->status ? 'success' : 'danger' }}">{{$receipt->status ? 'Paid' : 'Unpaid'}}</span>
                     </td>
-                    <td>{{$product->created_at}}</td>
-                    <td>{{$product->updated_at}}</td>
+                    <td>{{$receipt->created_at}}</td>
                     <td>
-                        <a href="{{ route('products.edit', $product) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-danger btn-delete" data-url="{{route('products.destroy', $product)}}"><i class="fas fa-trash"></i></button>
+                        <a href="{{ route('receipts.edit', $receipt) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger btn-delete" data-url="{{route('receipts.destroy', $receipt)}}"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        {{ $products->render()}}
+        {{ $receipts->render()}}
     </div>
 </div>
 @endsection
@@ -75,7 +68,7 @@
 
             swalWithBootstrapButtons.fire({
                 title: 'Are you sure?',
-                text: "Do you really want to delete this product?",
+                text: "Do you really want to delete this receipt?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
