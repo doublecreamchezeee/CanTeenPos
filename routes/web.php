@@ -14,16 +14,15 @@ use App\Http\Controllers\ReceiptController;
 |
 */
 
-
-Auth::routes();
-
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('homepage');
 
+Auth::routes();
 
 Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
+    Route::get('/{id}', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
 });
 
 
@@ -45,8 +44,6 @@ Route::prefix('admin')->group(function () {
     // Route::get('/receipt', 'ReceiptController@create')->name('receipt.create');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
 });
-
-
 
 // Route::prefix('auth')->group(function () {
 //     Route::get('/','HomeController@index')->name('home');
