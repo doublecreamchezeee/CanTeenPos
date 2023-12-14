@@ -12,6 +12,12 @@ class Receipt extends Model
     // user -> receipt 
     // cart -> detail receipt 
     // user-cart table -> detail-receipt table 
+
+    protected $fillable = [
+        "payment_type",
+        "total_cost",
+        "status",
+    ];
     public function cart()
     {
         return $this->belongsToMany(Product::class,"detail_receipts")->withPivot('quantity');

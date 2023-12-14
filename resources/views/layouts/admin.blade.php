@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
+    <title>@yield('title')</title> 
     {{-- <script src="http://localhost:8097"></script> --}}
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

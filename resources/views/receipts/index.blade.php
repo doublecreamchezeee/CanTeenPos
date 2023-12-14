@@ -5,7 +5,7 @@
 
 
 @section('content-actions')
-<a href="{{route('receipts.create')}}" class="btn btn-primary">Create</a>
+<a href="{{route('receipts.createReceipt')}}" class="btn btn-primary">Create</a>
 @endsection
 
 @section('styles')
@@ -40,8 +40,8 @@
                     </td>
                     <td>{{$receipt->created_at}}</td>
                     <td>
-                        <a href="{{ route('receipts.edit', $receipt) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-danger btn-delete" data-url="{{route('receipts.destroy', $receipt)}}"><i class="fas fa-trash"></i></button>
+                        {{-- <a href="{{ route('receipts.edit', $receipt) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <button class="btn btn-danger btn-delete" data-url="{{route('receipts.destroy', $receipt)}}"><i class="fas fa-trash"></i></button> --}}
                     </td>
                 </tr>
                 @endforeach

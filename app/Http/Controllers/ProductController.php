@@ -6,6 +6,7 @@ use App\Models\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use DB;
@@ -14,9 +15,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(4);
+        $products = new Product();
+        if ($request->search){
+            $products = $products->where('name','LIKE', "%{$request->search}%");
+        }
+
+        $products = $products->latest()->paginate(4);
+        if (request()->wantsJson()){
+            $all_products = Product::latest()->get();
+            return ProductResource::collection($all_products);
+        }
         return view('products.index')->with('products', $products);
     }
 

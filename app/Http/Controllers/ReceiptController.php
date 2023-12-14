@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Models\Receipt;
 use App\Models\Models\Product;
+use App\Models\Models\DetailReceipt;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -23,16 +24,46 @@ class ReceiptController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function createReceipt()
+    {
+        $newIDCreate = Receipt::latest()->count() + 1;
+        $receipt = Receipt::create([
+            "id" => $newIDCreate,
+            "total_cost" => 0,
+        ]);
+
+        if (!$receipt){
+            return redirect()->back()->with("error","There is a problem while creating receipt");
+        }
+        return redirect()->route('receipts.create');
+    }
+    
     public function create(Request $request)
     {
+        $receipt = Receipt::find(1);
+
         if ($request->wantsJson()) {
-            $receipt = Receipt::find(1);
+            if ($request->type === 0 ){
+            //     $newIDCreate = DetailReceipt::latest()->count() + 1;
+            //     $product = Product::where('barcode', $request->barcode)->first();
+            //     $detail_receipt = DetailReceipt::create([
+            //         "id" => $newIDCreate,
+            //         "receipt_id" => $receipt->id,
+            //         "product_id" => $product->id,
+            //     ]);
+            //     if (!$detail_receipt){
+            //         return response("ERROR");
+            //     }
+            //     $cartItems = $receipt->cart()->get();
+            //     return response($cartItems);
+                return 'no';
+            }
             $cartItems = $receipt->cart()->get();
             return response($cartItems);
         }
 
-        $products = Product::where('status', true)->latest()->paginate(10);
-        return view('receipts.create')->with('products', $products);
+        return view('receipts.create')  ;
     }
 
     /**
@@ -45,27 +76,78 @@ class ReceiptController extends Controller
             'barcode' => 'required|exists:products,barcode',
         ]);
         $barcode = $request->barcode;
+        $receiptID = $request->receiptID;
 
         $product = Product::where('barcode', $barcode)->first();
-        $cart = $request->receipt->cart()->where('barcode', $barcode)->first();
-        if ($cart) {
+        $unitPrice = $product->price;
+        
+        $receipt = Receipt::where('id',$receiptID)->first();
+        $cart = $receipt->cart()->where('barcode',$barcode)->first();
+
+                
+        if ($cart){
             // check product quantity
-            if ($product->quantity <= $cart->pivot->quantity) {
+            if ($product->quantity <= $cart->pivot->quantity){
                 return response([
                     'message' => 'Product available only: ' . $product->quantity,
                 ], 400);
             }
-            // update only quantity
+            // update quantity
             $cart->pivot->quantity = $cart->pivot->quantity + 1;
             $cart->pivot->save();
         } else {
-            if ($product->quantity < 1) {
+            if ($product->quantity < 1){
                 return response([
                     'message' => 'Product out of stock',
                 ], 400);
             }
-            $request->receipt->cart()->attach($product->id, ['quantity' => 1]);
+            $receipt->cart()->attach($product->id, ['quantity' => 1, 'unit_price' => $unitPrice]);
         }
+
+        return response('', 204);
+    }
+
+    public function changeQty(Request $request){
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        // $product = Product::find($request->product_id);
+
+        $product = Product::find($request->product_id);
+
+        $receiptID = $request->receiptID;
+        $receipt = Receipt::where('id',$receiptID)->first();
+        $cart = $receipt->cart()->where('product_id',$request->product_id)->first();
+        
+        if ($cart){
+            // check product quantity
+            if ($product->quantity < $request->quantity){
+                return response([
+                    'message' => 'Product available only: ' . $product->quantity,
+                ], 400);
+            }
+            $cart->pivot->quantity = $request->quantity;
+            $cart->pivot->save();
+        }
+        
+        return response([
+            'success' => true
+        ]);
+
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer|exists:products,id'
+        ]);
+
+        $receiptID = $request->receiptID;
+        $receipt = Receipt::where('id',$receiptID)->first();
+
+        $receipt->cart()->detach($request->product_id);
 
         return response('', 204);
     }

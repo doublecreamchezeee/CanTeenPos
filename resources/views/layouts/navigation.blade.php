@@ -48,6 +48,24 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('receipts.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                        {{ __('Báo cáo') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('receipts.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-newspaper"></i>
+                    <p>
+                        {{ __('Phiếu nhập') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('about') }}" class="nav-link">
                     <i class="nav-icon far fa-address-card"></i>
                     <p>

@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
-    Route::get('/{id}', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
+    Route::get('/products/{id}', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
 });
 
 
@@ -39,9 +39,12 @@ Route::prefix('admin')->group(function () {
     // Route::resource('receipts', \App\Http\Controllers\ReceiptController::class);    
     Route::get('/receipts/index', [ReceiptController::class, 'index'])->name('receipts.index');
 
-    Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipts.create');
-    Route::post('/receipts/create', [ReceiptController::class, 'store'])->name('receipts.store');
-    // Route::get('/receipt', 'ReceiptController@create')->name('receipt.create');
+    Route::get('/receipts/create', [ReceiptController::class, 'createReceipt'])->name('receipts.createReceipt');
+    Route::get('/receipts/create/cart', [ReceiptController::class, 'create'])->name('receipts.create');
+    Route::post('/receipts/create/cart', [ReceiptController::class, 'store'])->name('receipts.store');
+    Route::post('/receipts/create/cart/change-qty', [ReceiptController::class, 'changeQty']);
+    Route::delete('/receipts/create/cart/delete', [ReceiptController::class, 'delete']);
+    
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
 });
 
