@@ -16,8 +16,29 @@ class ReceiptController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {    
+        // Lấy danh sách các receipt (tôi giả định 1 receipt có nhiều detail_receipt)
         $receipts = Receipt::latest()->paginate(4);
+    
+        // Duyệt qua từng receipt và cập nhật total_cost
+        foreach ($receipts as $receipt) {
+            // Lấy chi tiết hóa đơn của receipt
+            $detailReceipts = DetailReceipt::where('receipt_id', $receipt->id)->get();
+    
+            // Tính tổng chi phí
+            $totalCost = 0;
+            foreach ($detailReceipts as $detailReceipt) {
+                $totalCost += $detailReceipt->quantity * $detailReceipt->unit_price;
+            }
+    
+            $payment_type = "cash"; 
+            // Cập nhật total_cost trong receipt
+            $receipt->update([
+                'total_cost' => $totalCost,
+            ]);
+        }
+    
+
         return view('receipts.index')->with('receipts', $receipts);
     }
 
@@ -31,6 +52,7 @@ class ReceiptController extends Controller
         $receipt = Receipt::create([
             "id" => $newIDCreate,
             "total_cost" => 0,
+            'payment_type' => "cash",
         ]);
 
         if (!$receipt){
@@ -39,26 +61,27 @@ class ReceiptController extends Controller
         return redirect()->route('receipts.create');
     }
     
+
     public function create(Request $request)
     {
-        $receipt = Receipt::find(1);
+        $receipt = Receipt::where('id',Receipt::max('id'))->first();
+        // $receipt = Receipt::find(1);
 
         if ($request->wantsJson()) {
-            if ($request->type === 0 ){
-            //     $newIDCreate = DetailReceipt::latest()->count() + 1;
-            //     $product = Product::where('barcode', $request->barcode)->first();
-            //     $detail_receipt = DetailReceipt::create([
-            //         "id" => $newIDCreate,
-            //         "receipt_id" => $receipt->id,
-            //         "product_id" => $product->id,
-            //     ]);
-            //     if (!$detail_receipt){
-            //         return response("ERROR");
-            //     }
-            //     $cartItems = $receipt->cart()->get();
-            //     return response($cartItems);
-                return 'no';
-            }
+            // if ($request->type === 0 ){
+            //     // $newIDCreate = DetailReceipt::latest()->count() + 1;
+            //     // $product = Product::where('barcode', $request->barcode)->first();
+            //     // $detail_receipt = DetailReceipt::create([
+            //     //     "id" => $newIDCreate,
+            //     //     "receipt_id" => $receipt->id,
+            //     //     "product_id" => $product->id,
+            //     // ]);
+            //     // if (!$detail_receipt){
+            //     //     return response("ERROR");
+            //     // }
+            //     // $cartItems = $receipt->cart()->get();
+            //     return response($receipt,204);
+            // }
             $cartItems = $receipt->cart()->get();
             return response($cartItems);
         }
@@ -76,12 +99,18 @@ class ReceiptController extends Controller
             'barcode' => 'required|exists:products,barcode',
         ]);
         $barcode = $request->barcode;
-        $receiptID = $request->receiptID;
-
         $product = Product::where('barcode', $barcode)->first();
         $unitPrice = $product->price;
-        
-        $receipt = Receipt::where('id',$receiptID)->first();
+
+        $receiptID = $request->receiptID;
+        $receipt = 0;
+        if (is_null($receiptID)){
+            $receipt = Receipt::where('id',Receipt::max('id'))->first();
+        }
+        else {
+            $receipt = Receipt::where('id',$receiptID)->first();
+        }
+
         $cart = $receipt->cart()->where('barcode',$barcode)->first();
 
                 
@@ -104,7 +133,7 @@ class ReceiptController extends Controller
             $receipt->cart()->attach($product->id, ['quantity' => 1, 'unit_price' => $unitPrice]);
         }
 
-        return response('', 204);
+        return response($receipt, 204);
     }
 
     public function changeQty(Request $request){

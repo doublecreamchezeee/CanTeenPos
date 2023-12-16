@@ -4,7 +4,7 @@
 @section('content-header','Create Receipt')
 
 @section('content')
-    <div id="receipt" class="receipt">
+    <div id="receipt" class="receipt" data-route="{{route('receipts.index')}}">
 
     </div>
 @endsection

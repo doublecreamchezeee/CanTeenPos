@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{$receipt->id}}</td>
                     <td>{{$receipt->total_cost}}</td>
-                    <td>KKK</td>
+                    <td></td>
                     <td>{{$receipt->payment_type}}</td>
 
                     <td>

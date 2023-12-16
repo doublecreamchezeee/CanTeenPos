@@ -6,6 +6,7 @@ import { sum } from "lodash";
 class Receipt extends Component {
     constructor(props) {
         super(props);
+        this.route = document.getElementById('receipt').getAttribute('data-route');
         this.state = {
             receipt: [],
             products: [],
@@ -28,26 +29,31 @@ class Receipt extends Component {
         this.loadProducts();
     }
 
+    back(){
+        window.location.href = this.route;
+    }
+
     handleScanBarcode(event) {
         event.preventDefault();
         const { barcode } = this.state;
         const { receipt } = this.state;
         // console.log("barcode: " + barcode);
 
-        console.log("From handleScanBarcode:\n", receipt);
+        // console.log("From handleScanBarcode:\n", receipt);
         
         if (!!barcode){
-            console.log("Exist barcode in scanbar");
+            // console.log("Exist barcode in scanbar");
             if (receipt.length === 0){
-                console.log("DetailReceipt emty");
+                // console.log("DetailReceipt emty");
                 axios
                     .post("/admin/receipts/create/cart",{
                         type: 0,
                         barcode,
                     })
                     .then((res) => {
+                        console.log(res);
                         this.loadReceipt();
-                        this.setState({ barcode: "" });
+                        this.setState({ barcode: ""});
                     })
             //         .catch((err) => {
             //             console.log(err);
@@ -55,7 +61,7 @@ class Receipt extends Component {
             }
     
             else {
-                console.log("DetailReceipt exist");
+                // console.log("DetailReceipt exist");
                 axios
                     .post("/admin/receipts/create/cart", {
                         barcode,
@@ -136,14 +142,14 @@ class Receipt extends Component {
 
     loadProducts(search = '') {
         const query = !! search ? '?search=' + search : '';
-        console.log("query:",query)
+        // console.log("query:",query)
         axios.get('/admin/products'+ query).then((res) => {
             const productData = res.data.data;
 
             const productsArray = Object.values(productData);
 
             this.setState({ products: productsArray }, () => {
-                console.log(this.state.products)
+                // console.log(this.state.products)
             });
         });
     }
@@ -156,24 +162,29 @@ class Receipt extends Component {
             const receiptArray = Object.values(receiptData);
 
             this.setState({ receipt: receiptArray }, () => {
-                console.log("Receipt: ",this.state.receipt);
+                // console.log("Receipt: ",this.state.receipt);
             });
         });
     }
 
-    addProductToCart(barcode,receipt) {
-        console.log("Product: ", this.state.products)
-        console.log("Barcode: ", barcode)
-        let product = this.state.products.filter((p) => p.barcode === barcode);
-        if (!!product) {
+    addProductToCart(product,receipt) {
+        console.log("AddCart-Product: ", this.state.products)
+        console.log("AddCart-Barcode: ", product.barcode)
+        console.log("AddCart-Receipt: ", receipt)
+
+        let check_product = this.state.products.filter((p) => p.barcode === product.barcode);
+        if (!!check_product) {
             // if product is already in cart
-            let receipt = this.state.receipt.filter((c) => c.id === product.id);
-            if (!!receipt) {
+            console.log("check pro_id",product.id)
+            let de_receipt = receipt.filter((c) => c.pivot.product_id === product.id);
+            console.log("Check receipt in cart", de_receipt);
+            if (!receipt) {
+                console.log('go if')
                 // update quantity
                 this.setState({
                     receipt: this.state.receipt.map((c) => {
                         if (
-                            c.id === product.id &&
+                            c.pivot.product_id === product.id &&
                             product.quantity > c.pivot.quantity
                         ) {
                             c.pivot.quantity = c.pivot.quantity + 1;
@@ -182,13 +193,14 @@ class Receipt extends Component {
                     }),
                 });
             } else {
+                console.log('go else')
                 if (product.quantity > 0) {
                     product = {
                         ...product,
                         pivot: {
                             quantity: 1,
                             product_id: product.id,
-                            user_id: 1,
+                            receipt_id: receipt.id,
                         },
                     };
 
@@ -196,7 +208,7 @@ class Receipt extends Component {
                 }
             }
             axios
-                .post("/admin/receipts/create/cart", { barcode,receiptID: this.state.receipt[0].pivot.receipt_id })
+                .post("/admin/receipts/create/cart", { barcode: product.barcode,receiptID: this.state.receipt[0].pivot.receipt_id })
                 .then((res) => {
                     this.loadReceipt();
                     console.log(res);
@@ -212,6 +224,7 @@ class Receipt extends Component {
         const { receipt, barcode, products } = this.state;
         return (
             <div className="row">
+            
                 <div className="col-md-6 col-lg-4">
                     <div className="row">
                         <div className="col">
@@ -292,6 +305,9 @@ class Receipt extends Component {
                             <button
                                 type="button"
                                 className="btn btn-primary btn-block"
+                                onClick={() =>
+                                    this.back()
+                                }
                             >
                                 Submit
                             </button>
@@ -313,7 +329,7 @@ class Receipt extends Component {
                     <div className="order-product">
                         {products.map((p) => (
                             <div
-                                onClick={() => this.addProductToCart(p.barcode)}
+                                onClick={() => this.addProductToCart(p,receipt)}
                                 key={p.id}
                                 className="item"
                             >
