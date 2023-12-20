@@ -23,6 +23,8 @@ Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
 });
 
+Route::get('/wheel', [App\Http\Controllers\WheelController::class, 'index']);
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
     Route::view('about', 'about')->name('about');
