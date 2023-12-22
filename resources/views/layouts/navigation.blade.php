@@ -28,7 +28,6 @@
                     </p>
                 </a>
             </li>
-
             <li class="nav-item">
                 <a href="{{ route('products.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-large"></i>
@@ -37,7 +36,14 @@
                     </p>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a href="{{ route('PhieuNhap.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th-large"></i>
+                    <p>
+                        {{ __('Phiếu Nhập') }}
+                    </p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{ route('about') }}" class="nav-link">
                     <i class="nav-icon far fa-address-card"></i>
