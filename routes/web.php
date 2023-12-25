@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\BaoCaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/receipts/create/cart/change-qty', [ReceiptController::class, 'changeQty']);
     Route::delete('/receipts/create/cart/delete', [ReceiptController::class, 'delete']);
     
+    Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
 });
 
