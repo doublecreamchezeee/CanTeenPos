@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\BaoCaoController;
@@ -50,7 +51,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
     Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
+
+
+
+    Route::get('/PhieuNhap/index', [PhieuNhapController::class, 'index'])->name('PhieuNhap.index');
+
 });
+
+
 
 // Route::prefix('auth')->group(function () {
 //     Route::get('/','HomeController@index')->name('home');
