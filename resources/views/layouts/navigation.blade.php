@@ -75,6 +75,15 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('test.index') }}" class="nav-link">
+                    <i class="nav-icon far fa-address-card"></i>
+                    <p>
+                        {{ __('Test') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p>

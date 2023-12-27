@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/receipts/create/cart/change-qty', [ReceiptController::class, 'changeQty']);
     Route::delete('/receipts/create/cart/delete', [ReceiptController::class, 'delete']);
     
+    Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
 });
 
