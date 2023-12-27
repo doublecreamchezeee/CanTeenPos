@@ -5,6 +5,8 @@ use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\BaoCaoController;
+use App\Http\Controllers\CartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +69,10 @@ Route::prefix('admin')->group(function () {
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
+// Trong file web.php
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::post('/cart/deleteAll', [CartController::class, 'deleteAll'])->name('cart.deleteAll');
+Route::post('/cart/updateQuantity/{id}', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
+Route::post('/cart/delete/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
+Route::post('/payment', [CartController::class, 'payment'])->name('cart.payment');

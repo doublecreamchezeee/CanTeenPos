@@ -57,7 +57,7 @@
 								@endif
 								<span class='logo'>|</span>
 
-								<a href="{{ route('homepage') }}" class="logo">					
+								<a href="{{ route('checkout') }}" class="logo">					
 									<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 								</a>
 

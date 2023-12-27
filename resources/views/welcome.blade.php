@@ -1,8 +1,9 @@
 @extends('layouts.menu')
 
 @section('content')
-<h1>Menu đa dạng các món ăn trong ngày!</h1>
+@include('guest.flash-message')
 
+<h1>Menu đa dạng các món ăn trong ngày!</h1>
 <form action="" class="form-inline">
 	<div class="center-text">Nếu bạn cần tìm kiếm món ăn:</div>
 
@@ -72,28 +73,25 @@
 							<p class="price"><span class="woocommerce-Price-amount amount">
 								<span id="product-price"></span>&nbsp;
 								<span class="woocommerce-Price-currencySymbol">₫</span>
+								<p>Số lượng còn lại: <span id="product-quantity"></span></p>
 							</p>
 						</div>
-
-						<div class="woocommerce-variation-add-to-cart variations_button woocommerce-variation-add-to-cart-disabled">
-							<button type="submit" class="single_add_to_cart_button button alt disabled wc-variation-selection-needed">Add to cart</button>
-							<input type="hidden" name="add-to-cart">
-							<div class="quantity buttons_added">
-								<input type="button" value="-" class="minus">
-								<input type="number" id="quantity_6572ecb056853" class="input-text qty text" step="1" min="0" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="">
-								<input type="button" value="+" class="plus">
-							</div>
-						</div>
-
-					</div>
-					
+						<form action="/cart/add" method="post">
+							@csrf
+							<input type="hidden" name="id" value="{{ $product->id}}">
+							<input type="number" name="quantity" value="1" min="1" max="{{ $product->quantity }}">
+							@if ($product->quantity == 0)
+								<button type="submit" class="single_add_to_cart_button button alt" disabled>Add to cart</button>
+							@else
+								<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+							@endif
+						</form>
+					</div>			
 				</div>
-                
             </div>
         </div>
     </div>
-</div>
-							
+</div>					
 @endsection
 
 
@@ -109,12 +107,23 @@
 				$('#product-img').attr('src', data.image);
 				$('#product-name').text(data.name);
 				$('#product-price').text(data.price);
+				$('input[name="id"]').val(data.id); // Cập nhật giá trị của input hidden
+				$('#product-quantity').text(data.quantity); // Cập nhật số lượng còn lại
 
+				// Định dạng giá sản phẩm
+				var formattedPrice = Number(data.price).toLocaleString('en');
+            	$('#product-price').text(formattedPrice);
+
+				// Cập nhật trạng thái của nút "Add to cart"
+				if (data.quantity == 0) {
+                	$('.single_add_to_cart_button').prop('disabled', true);
+				} else {
+					$('.single_add_to_cart_button').prop('disabled', false);
+				}
 			})
-
 		})
-
     });
 
 </script>
 @endsection
+
