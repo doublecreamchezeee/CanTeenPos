@@ -54,15 +54,6 @@
                     </p>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a href="{{ route('receipts.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-newspaper"></i>
-                    <p>
-                        {{ __('Phiếu nhập') }}
-                    </p>
-                </a>
-            </li>
             <li class="nav-item">
                 <a href="{{ route('PhieuNhap.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-large"></i>
@@ -76,15 +67,6 @@
                     <i class="nav-icon far fa-address-card"></i>
                     <p>
                         {{ __('Về chúng tôi') }}
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('test.index') }}" class="nav-link">
-                    <i class="nav-icon far fa-address-card"></i>
-                    <p>
-                        {{ __('Test') }}
                     </p>
                 </a>
             </li>
