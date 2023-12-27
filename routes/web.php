@@ -21,9 +21,9 @@ Auth::routes();
 
 Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
+    Route::get('/detail', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
+    
 });
-
-Route::get('/detail', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
 
 Route::get('/wheel', [App\Http\Controllers\WheelController::class, 'index']);
 

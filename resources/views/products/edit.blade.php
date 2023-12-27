@@ -50,6 +50,21 @@
             </div>
 
             <div class="form-group">
+                <label for="type">Type</label>
+                <select name="type" required class="form-control">
+                    <option value="">--Select Type--</option>
+                    @foreach($types as $type)
+                        <option value="{{ $type }}" {{ $product->type == $type ? 'selected' : '' }}>{{ $type }}</option>
+                    @endforeach
+                </select>
+                @error('type')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="barcode">Barcode</label>
                 <input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror"
                     id="barcode" placeholder="barcode" value="{{ old('barcode', $product->barcode) }}">

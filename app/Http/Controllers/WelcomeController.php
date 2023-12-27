@@ -29,4 +29,5 @@ class WelcomeController extends Controller
         return response()->json($products);
     }
 
+
 }

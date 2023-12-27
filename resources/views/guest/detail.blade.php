@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">{{ __('CHI TIẾT MÓN ĂN') }}</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal">&times;</button>
+                <button type="button" class="btn" data-bs-dismiss="modal">&times;</button>
 
             </div>
             <div class="modal-body"></div>

@@ -5,9 +5,21 @@
 <p>Đa dạng các món ăn và giàu chất dinh dưỡng. Ngoài ra còn có các loại nước ngọt và bánh trái,...</p>
 
 <p>Nếu bạn cần tìm kiếm món ăn:</p>
+<form action="" method="GET">
+	<div class="row">
+		<div class="col-md-3">
+			<label>Filter by Type</label>
+			<select name="types" id="">
+				<option value="">Select Type</option>
+				
+			</select>
+		</div>
+	</div>
+</form>
+
 <form action="" class="form-inline">
 	<div class="form-group">
-    	<input class="form-control input-lg" id="inputlg" type="text" placeholder="Nhập tên món hoặc loại">
+    	<input class="form-control input-lg" id="inputlg" name="key" type="text" placeholder="Nhập tên món">
 		<button type="submit" class="btn btn-pdefault">
 			Search
 		</button>
