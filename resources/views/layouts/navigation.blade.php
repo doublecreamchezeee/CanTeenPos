@@ -48,7 +48,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('receipts.index') }}" class="nav-link">
+                <a href="{{ route('BaoCao.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-file"></i>
                     <p>
                         {{ __('Báo cáo') }}
