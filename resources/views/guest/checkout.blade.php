@@ -53,13 +53,10 @@ use App\Models\Models\Product
                                         <input type="number" name="quantity" min="1" max="{{ $Product->quantity }}" value="{{ $details['quantity'] }}">
                                         <button type="submit">Cập nhật</button>
                                     </form>
-                                @else
-                                    
-                                
                                 @endif
                             </td>
-                            <td>{{ $price }}</td>
-                            <td>{{ $details['quantity'] * $price }}</td>
+                            <td>{{ number_format($price) }}</td>
+                            <td>{{ number_format($details['quantity'] * $price) }}</td>
                             <td>
                                 <form action="{{ route('cart.removeFromCart', $id) }}" method="POST">
                                     @csrf
@@ -73,10 +70,12 @@ use App\Models\Models\Product
                 @endforeach
             </table>
             <div style="text-align: right">
-                <h3>Tổng tiền: {{ $total }}</h3>
-            <form action="{{ route('cart.checkout') }}" method="POST">
+            <h3>Tổng tiền: {{ number_format($total) }} VNĐ</h3>
+            <form action="{{ route('cart.payment') }}" method="POST">
                 @csrf
                 <button type="submit">Thanh toán</button>
+            </form>
+            </div>
         @else
             <p>Giỏ hàng trống</p>
         @endif

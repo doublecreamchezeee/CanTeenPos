@@ -110,6 +110,9 @@
 				$('input[name="id"]').val(data.id); // Cập nhật giá trị của input hidden
 				$('#product-quantity').text(data.quantity); // Cập nhật số lượng còn lại
 
+				// Định dạng giá sản phẩm
+				var formattedPrice = Number(data.price).toLocaleString('en');
+            	$('#product-price').text(formattedPrice);
 
 				// Cập nhật trạng thái của nút "Add to cart"
 				if (data.quantity == 0) {
