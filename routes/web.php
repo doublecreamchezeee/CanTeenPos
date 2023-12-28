@@ -27,6 +27,8 @@ Auth::routes();
 
 Route::prefix('')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('homepage');
+    // Route::get('/detail', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
+    Route::get('/wheel', [App\Http\Controllers\WheelController::class, 'index'])->name('wheel');
     Route::get('/products/{id}', [App\Http\Controllers\WelcomeController::class, 'detail'])->name('detail');
     // Trong file web.php
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
@@ -60,9 +62,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
     Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
-
-
-
     Route::get('/PhieuNhap/index', [PhieuNhapController::class, 'index'])->name('PhieuNhap.index');
 
 });

@@ -25,6 +25,7 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Actions</th>
+                    <th>Type</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                 </tr>
@@ -40,6 +41,7 @@
                     <td>{{$product->barcode}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
+                    <td>{{$product->type}}</td>
 
                     <td>
                         <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}">{{$product->status ? 'Active' : 'Inactive'}}</span>

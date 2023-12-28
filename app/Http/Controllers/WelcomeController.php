@@ -21,11 +21,14 @@ class WelcomeController extends Controller
         return view('welcome')->with('products', $products);
     }
 
-    public function detail($id)
+    // handle detail product ajax request
+    public function detail($request)
     {
+        $id = $request->id;
         $products = Product::find($id);
 
         return response()->json($products);
     }
+
 
 }

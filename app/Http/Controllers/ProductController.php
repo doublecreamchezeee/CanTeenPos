@@ -35,7 +35,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $types = Product::getEnumValues();
+        return view('products.create', compact('types'));
+
     }
 
     /**
@@ -56,6 +58,7 @@ class ProductController extends Controller
             "price" => $request->price,
             "quantity" => $request->quantity,
             "status" => $request->status,
+            "type" => $request->type,
         ]);
 
         if (! $product){
@@ -78,7 +81,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("products.edit")->with("product", $product);
+        $types = Product::getEnumValues(); // Retrieve all types from your database
+        return view('products.edit', compact('product', 'types'));
     }
 
     /**
@@ -91,7 +95,9 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
+        $product->type = $request->type;
         $product->status = $request->status;
+        
         
         if ($request->hasFile('image')){
             Storage::delete($product->image);

@@ -15,5 +15,11 @@ class Product extends Model
         "price",
         "quantity",
         "status",
+        "type",
     ];
+
+    public static function getEnumValues()
+    {
+        return ['Food', 'Beverage'];
+    }
 }
