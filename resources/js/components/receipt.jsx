@@ -22,6 +22,7 @@ class Receipt extends Component {
         this.addProductToCart = this.addProductToCart.bind(this);
         this.handleChangeSearch = this.handleChangeSearch.bind(this);
         this.handleSeach = this.handleSeach.bind(this);
+        this.back = this.back.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +32,35 @@ class Receipt extends Component {
 
     back(){
         window.location.href = this.route;
+    }
+
+    cancel(){
+        axios
+            .post("/admin/receipts/create/cart/delete/receipt", {
+                _method: "DELETE",
+            })
+            .then((res) => {
+                console.log('Delete successful: ', res.data);
+                window.location.href = this.route;
+            })
+            .catch((e) => {
+                console.error('Error cancel: ',e);
+            })
+    }
+
+    handleCancelDetail(){
+        console.log(this.state)
+        axios
+            .post("/admin/receipts/create/cart/delete/detail", {
+                _method: "DELETE",
+            })
+            .then((res) => {
+                console.log('Delete detail receipt successful: ', res.data);
+                this.cancel()
+            })
+            .catch((e) => {
+                console.error('Error cancel', e)
+            })
     }
 
     handleScanBarcode(event) {
@@ -297,6 +327,9 @@ class Receipt extends Component {
                             <button
                                 type="button"
                                 className="btn btn-danger btn-block"
+                                onClick={() => 
+                                    this.handleCancelDetail()
+                                }
                             >
                                 Cancel
                             </button>

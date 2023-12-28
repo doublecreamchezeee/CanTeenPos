@@ -208,8 +208,35 @@ class ReceiptController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Receipt $receipt)
+    public function destroy()
     {
-        //
+        try {
+            // Find the main receipt by ID
+            $receipt = Receipt::where('id',Receipt::max('id'))->first();
+
+            // Delete details associated with the receipt
+            $receipt->delete();
+
+            return response()->json(['message' => 'Receipt and details deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error deleting receipt and details'], 500);
+        }
+    }
+
+    public function destroyDetail()
+    {
+        try {
+            $receipt = Receipt::where('id',Receipt::max('id'))->first();
+
+            // Find the receipt detail by ID
+            $detail = DetailReceipt::where('receipt_id',$receipt->id);
+
+            // Delete the detail
+            $detail->delete();
+
+            return response()->json(['message' => 'Receipt detail deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error deleting receipt detail'], 500);
+        }
     }
 }

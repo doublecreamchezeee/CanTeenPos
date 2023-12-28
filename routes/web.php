@@ -57,8 +57,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/receipts/create/cart', [ReceiptController::class, 'create'])->name('receipts.create');
     Route::post('/receipts/create/cart', [ReceiptController::class, 'store'])->name('receipts.store');
     Route::post('/receipts/create/cart/change-qty', [ReceiptController::class, 'changeQty']);
-    Route::delete('/receipts/create/cart/delete', [ReceiptController::class, 'delete']);
     
+    Route::delete('/receipts/create/cart/delete/receipt', [ReceiptController::class, 'destroy']);
+    Route::delete('/receipts/create/cart/delete/detail', [ReceiptController::class, 'destroyDetail']);
+
+    Route::delete('/receipts/create/cart/delete', [ReceiptController::class, 'delete']);
+
     Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
     Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');

@@ -39,7 +39,7 @@
                         		</a>
 
 								<span class='logo'>|</span>
-								<a href="{{ route('homepage') }}" class="logo">
+								<a href="{{ route('wheel') }}" class="logo">
                             		<span class="title">Vòng xoay</span>
                         		</a>
 
