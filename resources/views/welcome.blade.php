@@ -5,17 +5,6 @@
 <p>Đa dạng các món ăn và giàu chất dinh dưỡng. Ngoài ra còn có các loại nước ngọt và bánh trái,...</p>
 
 <p>Nếu bạn cần tìm kiếm món ăn:</p>
-<form action="" method="GET">
-	<div class="row">
-		<div class="col-md-3">
-			<label>Filter by Type</label>
-			<select name="types" id="">
-				<option value="">Select Type</option>
-				
-			</select>
-		</div>
-	</div>
-</form>
 
 <form action="" class="form-inline">
 	<div class="form-group">
@@ -31,7 +20,7 @@
 <section class="tiles">
 @if (isset($products))
 	@if ($products->isEmpty()) 
-		<h3>Không tìm thấy món ăn, vui lòng nhập tên khác hoặc trở lại menu để chọn món!</h3>
+		<h5>Không tìm thấy món ăn, vui lòng nhập tên khác hoặc trở lại menu để chọn món!</h5>
 	@else
 		@foreach ($products as $product)
 			<article class="style3">
@@ -42,6 +31,7 @@
 					class='show_detail'
 					data-bs-toggle="modal" 
 					data-bs-target="#proModal"
+					data-id="{{ $product->id }}"
 					data-name="{{ $product->name }}"
 					data-price="{{ $product->price }}"
 					data-quantity="{{ $product->quantity }}"
@@ -59,18 +49,22 @@
 		@endforeach
 		{{ $products->render()}}
 
+		@include('guest.detail')
 	@endif
 @endif
+</section>
 
 @endsection
 
-@include('guest.detail')
+
+
 
 
 @section('script')
 <script>
 	$(document).on('click','.show_detail',function(e)
 	{
+		let id = $(this).data('id');
 		let name = $(this).data('name');
 		let price = $(this).data('price');
 		let quantity = $(this).data('quantity');
@@ -80,6 +74,20 @@
 		$('.price').text(price);
 		$('.quantity').text(quantity);
 		$('#image').attr('src',image);
+		$('#product-id').val(id);
+    	$('#product-quantity').attr('max', quantity);
+
+		// Định dạng giá sản phẩm
+		var formattedPrice = Number(data.price).toLocaleString('en');
+        $('.price').text(formattedPrice);
+
+		// Cập nhật trạng thái của nút "Add to cart"
+		if (data.quantity == 0) {
+        	$('.single_add_to_cart_button').prop('disabled', true);
+		} else {
+			$('.single_add_to_cart_button').prop('disabled', false);
+		}
+
 
 	});
 	
