@@ -6,16 +6,27 @@ use App\Models\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use DB;
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(4);
+        $products = new Product();
+        if ($request->search){
+            $products = $products->where('name','LIKE', "%{$request->search}%");
+        }
+
+        $products = $products->latest()->paginate(4);
+        if (request()->wantsJson()){
+            $all_products = Product::latest()->get();
+            return ProductResource::collection($all_products);
+        }
         return view('products.index')->with('products', $products);
     }
 
@@ -24,7 +35,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $types = Product::getEnumValues();
+        return view('products.create', compact('types'));
+
     }
 
     /**
@@ -45,6 +58,7 @@ class ProductController extends Controller
             "price" => $request->price,
             "quantity" => $request->quantity,
             "status" => $request->status,
+            "type" => $request->type,
         ]);
 
         if (! $product){
@@ -67,7 +81,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("products.edit")->with("product", $product);
+        $types = Product::getEnumValues(); // Retrieve all types from your database
+        return view('products.edit', compact('product', 'types'));
     }
 
     /**
@@ -80,7 +95,9 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
+        $product->type = $request->type;
         $product->status = $request->status;
+        
         
         if ($request->hasFile('image')){
             Storage::delete($product->image);

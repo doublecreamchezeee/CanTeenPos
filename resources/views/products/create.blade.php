@@ -32,6 +32,23 @@
     </div>
 
     <div class="form-group">
+        <label for="type">Type</label>
+        <select wire:model.defer="type" required class="form-control">
+            <option value="">--Select Type--</option>
+            @foreach($types as $type)
+                <option value="{{ $type }}">{{ $type }}</option>
+            @endforeach
+
+        </select>
+        @error('type')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+
+
+    <div class="form-group">
         <label for="image">Image</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" name="image" id="image">

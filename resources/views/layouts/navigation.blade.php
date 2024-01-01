@@ -15,7 +15,7 @@
                 <a href="{{ route('admin') }}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
-                        {{ __('Dashboard') }}
+                        {{ __('Trang chủ') }}
                     </p>
                 </a>
             </li>
@@ -24,7 +24,7 @@
                 <a href="{{ route('users.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
-                        {{ __('Users') }}
+                        {{ __('Nhân viên') }}
                     </p>
                 </a>
             </li>
@@ -32,7 +32,25 @@
                 <a href="{{ route('products.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-large"></i>
                     <p>
-                        {{ __('Products') }}
+                        {{ __('Món ăn') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('receipts.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-receipt"></i>
+                    <p>
+                        {{ __('Hóa đơn') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('BaoCao.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                        {{ __('Báo cáo') }}
                     </p>
                 </a>
             </li>
@@ -48,7 +66,7 @@
                 <a href="{{ route('about') }}" class="nav-link">
                     <i class="nav-icon far fa-address-card"></i>
                     <p>
-                        {{ __('About us') }}
+                        {{ __('Về chúng tôi') }}
                     </p>
                 </a>
             </li>
@@ -57,7 +75,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p>
-                        Two-level menu
+                        Menu
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -65,7 +83,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Child menu</p>
+                            <p>Menu nhỏ</p>
                         </a>
                     </li>
                 </ul>
@@ -75,7 +93,7 @@
                 <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>
-                        {{ __('Log out') }}
+                        {{ __('Đăng xuất') }}
                     </p>
                     <form action="{{route('logout')}}" method="POST" id="logout-form">@csrf</form>
                     

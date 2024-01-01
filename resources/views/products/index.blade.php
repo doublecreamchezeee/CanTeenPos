@@ -24,9 +24,10 @@
                     <th>Barcode</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th>Actions</th>
+                    <th>Type</th>
                     <th>Created At</th>
                     <th>Updated At</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,12 +35,13 @@
                 <tr>
                     <td>{{$product->id}}</td>
                     <td>{{$product->name}}</td>
-                    {{-- <td><img class="product-img" src="{{ asset('storage/' . $product->image) }}" alt=""></td>                    <td><img class="product-img" src="{{ Storage::url('app/' . $product->image) }}" alt=""></td> --}}
+                    {{-- <td><img class="product-img" src="{{ asset('storage/' . $product->image) }}" alt=""></td>                    
+                    <td><img class="product-img" src="{{ Storage::url('app/' . $product->image) }}" alt=""></td> --}}
                     <td><img class="product-img" src="{{ Storage::url('public/' . $product->image) }}" alt=""></td>
-
                     <td>{{$product->barcode}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
+                    <td>{{$product->type}}</td>
 
                     <td>
                         <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}">{{$product->status ? 'Active' : 'Inactive'}}</span>

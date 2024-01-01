@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Login') }}</p>
+        <p class="login-box-msg">{{ __('Đăng nhập') }}</p>
 
         <form action="{{ route('login') }}" method="post">
             @csrf
@@ -36,17 +36,17 @@
             </div>
 
             <div class="row">
-                <div class="col-8">
+                <div class="col-7">
                     <div class="icheck-primary">
                         <input type="checkbox" id="remember" name="remember">
                         <label for="remember">
-                            {{ __('Remember Me') }}
+                            {{ __('Ghi nhớ') }}
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
+                <div class="col-5">
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Đăng nhập') }}</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -54,7 +54,7 @@
 
         @if (Route::has('password.request'))
             <p class="mb-1">
-                <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                <a href="{{ route('password.request') }}">{{ __('Quên mật khẩu?') }}</a>
             </p>
         @endif
     </div>
