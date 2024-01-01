@@ -1,3 +1,7 @@
+<?php
+use App\Models\Models\Product
+?>
+
 @extends('layouts.menu')
 @include('guest.flash-message')
 

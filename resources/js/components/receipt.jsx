@@ -118,7 +118,7 @@ class Receipt extends Component {
     handleClickDelete(product_id) {
         const { receipt } = this.state;
         axios
-            .post("/admin/receipts/create/cart/delete", {
+            .post("/admin/receipts/create/cart/delete/product", {
                 product_id,
                 _method: "DELETE",
                 receiptID: receipt[0].pivot.receipt_id,
