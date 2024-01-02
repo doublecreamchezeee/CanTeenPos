@@ -66,7 +66,18 @@ Route::prefix('admin')->group(function () {
     Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
     Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
+
+
     Route::get('/PhieuNhap/index', [PhieuNhapController::class, 'index'])->name('PhieuNhap.index');
+    Route::get('/PhieuNhap/create', [PhieuNhapController::class, 'create'])->name('PhieuNhap.create');
+    Route::post('/PhieuNhap/store', [PhieuNhapController::class, 'store'])->name('PhieuNhap.store');
+    Route::get('/PhieuNhap/{id}', [PhieuNhapController::class, 'show'])->name('PhieuNhap.show');
+    Route::get('/PhieuNhap/{id}/edit', [PhieuNhapController::class, 'edit'])->name('PhieuNhap.edit');
+    Route::put('/PhieuNhap/{id}', [PhieuNhapController::class, 'update'])->name('PhieuNhap.update');
+    Route::delete('/phieunhap/{id}', [PhieuNhapController::class,'destroy'])->name('PhieuNhap.destroy');
+
+
+    
 
 });
 

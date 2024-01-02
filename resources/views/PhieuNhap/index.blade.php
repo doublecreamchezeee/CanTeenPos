@@ -4,7 +4,7 @@
 @section('content-header','Danh sách Phiếu Nhập')
 
 @section('content-actions')
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPhieuNhapModal">Thêm Phiếu Nhập</button>
+    <a href="{{route('PhieuNhap.create')}}" class="btn btn-primary">Thêm Phiếu Nhập</a>
 @endsection
 
 @section('styles')
@@ -27,12 +27,19 @@
             <!-- Dùng vòng lặp để hiển thị danh sách Phiếu Nhập -->
             @foreach ($phieuNhaps as $phieuNhap)
                 <tr>
-                    <td>{{$phieuNhap->MaNV}}</td>
                     <td>{{$phieuNhap->MaPhieu}}</td>
-                    <td>{{$phieuNhap->MaSp}}</td>
+                    <td>{{$phieuNhap->MaNV}}</td>
+                    <td>{{$phieuNhap->Ngaylap}}</td>
                     <!-- Thêm nút thao tác hoặc xem chi tiết tại đây -->
                     <td>
                         <!-- Thêm các nút hoặc thao tác cho Phiếu Nhập -->
+                            <a href="{{ route('PhieuNhap.show', $phieuNhap->id) }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('PhieuNhap.edit', $phieuNhap->id) }}" class="btn btn-warning">Update</a>
+                            <form action="{{ route('PhieuNhap.destroy', $phieuNhap->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                     </td>
                 </tr>
             @endforeach
