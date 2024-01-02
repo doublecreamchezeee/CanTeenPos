@@ -95,12 +95,14 @@
 								</h2>
 
 								<p>
-									Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-									Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, 
-									vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, 
-									fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in 
-									purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum 
-									convallis elit. Pellentesque enim turpis, hendrerit tristique.
+								Chào mừng bạn đến với trang web canteenUS của chúng tôi! Chúng tôi tận tâm cung cấp cho bạn 
+								trải nghiệm ăn uống liền mạch. Tại đây, bạn có thể khám phá thực đơn đa dạng của chúng tôi, 
+								bao gồm nhiều bữa ăn ngon và tốt cho sức khỏe. Bạn cũng có thể xem các sản phẩm đặc biệt hàng 
+								ngày của chúng tôi, đặt hàng trực tuyến và thậm chí cung cấp phản hồi về các dịch vụ của chúng 
+								tôi. Trang web của chúng tôi được thiết kế thân thiện với người dùng, đảm bảo bạn có thể điều 
+								hướng qua nó một cách dễ dàng. Chúng tôi cũng ưu tiên sức khỏe và sự an toàn của bạn, vì vậy 
+								hãy yên tâm rằng thực phẩm của chúng tôi được chuẩn bị và phục vụ theo tiêu chuẩn vệ sinh cao 
+								nhất. Hãy tham gia cùng chúng tôi để có trải nghiệm ẩm thực thú vị ngay trong tầm tay bạn!
 								</p>
 							</section>
 							

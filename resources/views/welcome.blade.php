@@ -29,6 +29,17 @@
 				<span class="image">
 					<img src="{{ Storage::url('public/' . $product->image) }}" alt="" />
 				</span>
+				@if ($product->quantity == 0)
+				<a class='show_detail'>
+					<h2>{{$product->name}}</h2>
+					
+					<p><strong>{{$product->price}}</strong></p>
+
+					<p>
+						{{$product->description}}
+		            </p>
+				</a>
+				@else
 				<a href="#"
 					class='show_detail'
 					data-bs-toggle="modal" 
@@ -47,6 +58,7 @@
 						{{$product->description}}
 		            </p>
 				</a>
+				@endif
 			</article>
 		@endforeach
 		{{ $products->render()}}
