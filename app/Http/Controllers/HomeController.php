@@ -37,25 +37,25 @@ class HomeController extends Controller
         // Tính tổng số lượng đã bán (totalSold)
         $totalSold = DetailReceipt::sum('quantity');
 
-        // Doanh thu tháng này
-        $revenueThisMonth = BaoCao::where('type', 'bc_thang')
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->value('TongDoanhThu');
+        // // Doanh thu tháng này
+        // $revenueThisMonth = BaoCao::where('type', 'bc_thang')
+        //     ->whereMonth('created_at', Carbon::now()->month)
+        //     ->value('TongDoanhThu');
 
-        // Doanh thu tháng trước
-        $revenueLastMonth = BaoCao::where('type', 'bc_thang')
-            ->whereMonth('created_at', Carbon::now()->subMonth()->month)
-            ->value('TongDoanhThu');
+        // // Doanh thu tháng trước
+        // $revenueLastMonth = BaoCao::where('type', 'bc_thang')
+        //     ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        //     ->value('TongDoanhThu');
 
-        // Doanh thu hôm nay
-        $revenueToday = BaoCao::where('type', 'bc_ngay')
-            ->whereDate('created_at', Carbon::today())
-            ->value('TongDoanhThu');
+        // // Doanh thu hôm nay
+        // $revenueToday = BaoCao::where('type', 'bc_ngay')
+        //     ->whereDate('created_at', Carbon::today())
+        //     ->value('TongDoanhThu');
 
-        // Doanh thu hôm qua
-        $revenueYesterday = BaoCao::where('type', 'bc_ngay')
-            ->whereDate('created_at', Carbon::yesterday())
-            ->value('TongDoanhThu');
+        // // Doanh thu hôm qua
+        // $revenueYesterday = BaoCao::where('type', 'bc_ngay')
+        //     ->whereDate('created_at', Carbon::yesterday())
+        //     ->value('TongDoanhThu');
 
         return view('home', compact('bestProducts', 'totalSold'));
     }
