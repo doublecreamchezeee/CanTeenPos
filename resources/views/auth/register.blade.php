@@ -62,7 +62,14 @@
                     </div>
                 </div>
             </div>
-
+            <div class="input-group mb-3">
+                <select id="role" class="form-control" name="role" required>
+                    <option value="admin">Admin</option>
+                    <option value="thungan">Thu Ngân</option>
+                    <option value="nhanvien">Nhân viên</option>
+                </select>
+            </div>
+            
             <div class="row">
                 <div class="col-12">
                     <button type="submit"
