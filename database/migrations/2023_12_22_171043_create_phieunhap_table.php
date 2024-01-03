@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('MaPhieu')->unsigned();
             $table->timestamp('Ngaylap')->nullable();
             $table->integer('Dongia');
+            $table->integer('SoLuong');
             $table->timestamps();
         });
     }
