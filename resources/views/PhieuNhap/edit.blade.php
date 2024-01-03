@@ -28,6 +28,10 @@
             <label for="Ngaylap">Ngày lập</label>
             <input type="date" class="form-control" id="Ngaylap" name="Ngaylap" value="{{ $phieuNhap->Ngaylap }}">
         </div>
+        <div class="form-group">
+            <label for="SoLuong">Số lượng</label>
+            <input type="number" class="form-control" id="SoLuong" name="SoLuong" value="{{ $phieuNhap->SoLuong }}">
+        </div>
         <button type="submit" class="btn btn-primary">Cập nhật</button>
     </form>
 @endsection
