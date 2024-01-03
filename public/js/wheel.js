@@ -57,17 +57,15 @@ function truncateLabel(label, maxLength) {
 }
 
 ctx.fillText(truncateLabel(sector.label, 12), rad - 10, 10);
-
-// ctx.fillText(sector.label, rad - 10, 10);
 ctx.restore();
 };
 
-//* CSS rotate CANVAS Element */
+
 const rotate = () => {
-const sector = sectors[getIndex()];
-ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
-elSpin.textContent = !angVel ? "SPIN" : sector.id;
-elSpin.style.background = sector.color;
+    const sector = sectors[getIndex()];
+    ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
+    elSpin.textContent = !angVel ? "SPIN" : sector.id;
+    elSpin.style.background = sector.color;
 };
 
 const frame = () => {
@@ -99,9 +97,9 @@ else {
     const selectedFood = sectors[getIndex()].label.split('. ')[1]; // Extract food name
     
     // Update the message element
-    elMessage.textContent = `Hôm nay bạn nên ăn: ${selectedFood}`;
+    elMessage.textContent = `Hôm nay bạn nên ăn: ${selectedFood} (o^▽^o)`;
 
-    }
+    }    
 }
 
 ang += angVel; // Update angle
