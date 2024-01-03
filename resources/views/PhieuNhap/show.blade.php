@@ -14,6 +14,8 @@
                 <th>Mã Phiếu</th>
                 <th>Ngày lập</th>
                 <th>Đơn giá</th>
+                <th>Số lượng</th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,6 +25,7 @@
                 <td>{{ $phieuNhap->MaPhieu }}</td>
                 <td>{{ $phieuNhap->Ngaylap }}</td>
                 <td>{{ $phieuNhap->Dongia }}</td>
+                <td>{{ $phieuNhap->SoLuong }}</td>
             </tr>
         </tbody>
     </table>

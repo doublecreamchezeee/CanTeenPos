@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Models\PhieuNhap;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Models\Product;
 class PhieuNhapController extends Controller
 {
     /**
@@ -35,7 +36,8 @@ class PhieuNhapController extends Controller
             'MaSp' => 'required',
             'MaPhieu' => 'required',
             'Dongia' => 'required',
-            'Ngaylap' => 'required'
+            'Ngaylap' => 'required',
+            'SoLuong' => 'required'
             // Thêm các quy tắc xác thực khác tại đây
         ]);
     
@@ -45,10 +47,20 @@ class PhieuNhapController extends Controller
         $phieuNhap->MaPhieu = $validatedData['MaPhieu'];
         $phieuNhap->Dongia = $validatedData['Dongia'];
         $phieuNhap->Ngaylap = $validatedData['Ngaylap'];
+        $phieuNhap->SoLuong = $validatedData['SoLuong'];
+
 
         // Gán giá trị cho các thuộc tính khác của $phieunhap tại đây
     
         $phieuNhap->save();
+
+
+        $product = Product::find($validatedData['MaSp']);
+        // Cập nhật số lượng sản phẩm
+        $product->quantity += $validatedData['SoLuong'];
+
+        // Lưu sản phẩm
+        $product->save();
     
         return redirect()->route('PhieuNhap.index')->with('success', 'Phiếu Nhập đã được tạo thành công!');
     }
