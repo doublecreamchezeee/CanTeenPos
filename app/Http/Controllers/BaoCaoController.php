@@ -12,9 +12,8 @@ class BaoCaoController extends Controller
      */
     public function index()
     {
-        $baoCao = BaoCao::latest()->paginate(1);
-        // return view('PhieuNhap.index')->with($phieuNhap);
-        return view('BaoCao.index')->with('baoCaos', $baoCao);
+        $baoCaos = BaoCao::latest()->paginate(1);
+        return view('BaoCao.index', compact('baoCaos'));
     }
 
     /**
@@ -22,7 +21,7 @@ class BaoCaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('BaoCao.create');
     }
 
     /**
@@ -30,7 +29,16 @@ class BaoCaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'MaNV' => 'required|numeric',
+            'ThoiGianLap' => 'nullable|date',
+            'GiaiDoanBaoCao' => 'required|string',
+            'TongDoanhThu' => 'required|numeric',
+        ]);
+
+        BaoCao::create($request->all());
+
+        return redirect()->route('baoCao.index')->with('success', 'Báo cáo đã được tạo thành công.');
     }
 
     /**
@@ -38,7 +46,6 @@ class BaoCaoController extends Controller
      */
     public function show(BaoCao $baoCao)
     {
-        //
     }
 
     /**
@@ -46,7 +53,7 @@ class BaoCaoController extends Controller
      */
     public function edit(BaoCao $baoCao)
     {
-        //
+        return view('BaoCao.edit', compact('baoCao'));
     }
 
     /**
@@ -54,7 +61,15 @@ class BaoCaoController extends Controller
      */
     public function update(Request $request, BaoCao $baoCao)
     {
-        //
+        $request->validate([
+            'MaNV' => 'required|numeric',
+            'ThoiGianLap' => 'nullable|date',
+            'GiaiDoanBaoCao' => 'required|string',
+        ]);
+
+        $baoCao->update($request->all());
+
+        return redirect()->route('baoCao.index')->with('success', 'Báo cáo đã được cập nhật thành công.');
     }
 
     /**
@@ -62,6 +77,8 @@ class BaoCaoController extends Controller
      */
     public function destroy(BaoCao $baoCao)
     {
-        //
+        $baoCao->delete();
+
+        return redirect()->route('baoCao.index')->with('success', 'Báo cáo đã được xóa thành công.');
     }
 }
