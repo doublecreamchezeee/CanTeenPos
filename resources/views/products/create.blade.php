@@ -33,12 +33,9 @@
 
     <div class="form-group">
         <label for="type">Type</label>
-        <select wire:model.defer="type" required class="form-control">
-            <option value="">--Select Type--</option>
-            @foreach($types as $type)
-                <option value="{{ $type }}">{{ $type }}</option>
-            @endforeach
-
+        <select name="type" id="type" class="form-control" required >
+            <option value="Food">Food</option>
+            <option value="Berverage">Berverage</option>
         </select>
         @error('type')
         <span class="invalid-feedback" role="alert">

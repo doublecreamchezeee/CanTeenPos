@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <div class="alert alert-info">
+                    {{-- <div class="alert alert-info">
                         Sample table page
-                    </div>
+                    </div> --}}
 
                     <div class="card">
                         <div class="card-body p-0">
@@ -30,8 +30,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Tên</th>
                                         <th>Email</th>
+                                        <th>Chức vụ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,6 +40,7 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{$user->role}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

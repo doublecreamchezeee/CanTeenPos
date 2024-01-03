@@ -40,7 +40,7 @@ class PhieuNhapController extends Controller
             'SoLuong' => 'required'
             // Thêm các quy tắc xác thực khác tại đây
         ]);
-    
+        
         $phieuNhap = new PhieuNhap;
         $phieuNhap->MaNV = $validatedData['MaNV'];
         $phieuNhap->MaSp = $validatedData['MaSp'];

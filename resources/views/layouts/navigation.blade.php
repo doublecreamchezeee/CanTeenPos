@@ -49,9 +49,17 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('BaoCao.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-file"></i>
+                    <i class="nav-icon fas fa-th-large"></i>
                     <p>
                         {{ __('Báo cáo') }}
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('PhieuNhap.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                        {{ __('Phiếu nhập') }}
                     </p>
                 </a>
             </li>
