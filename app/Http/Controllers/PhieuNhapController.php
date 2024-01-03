@@ -40,7 +40,21 @@ class PhieuNhapController extends Controller
             'SoLuong' => 'required'
             // Thêm các quy tắc xác thực khác tại đây
         ]);
-        
+    
+        // Kiểm tra sản phẩm có tồn tại không
+        $product = Product::find($validatedData['MaSp']);
+    
+        if (!$product) {
+            return redirect()->route('PhieuNhap.index')->with('error', 'Sản phẩm không tồn tại!');
+        }
+    
+        // Kiểm tra loại sản phẩm có phải là 'Beverage' không
+        if ($product->type !== 'Beverage') {
+            return redirect()->route('PhieuNhap.index')->with('error', 'Sản phẩm không phải là Beverage!');
+        }
+    
+        // Tiếp tục thêm các xử lý khác nếu cần
+    
         $phieuNhap = new PhieuNhap;
         $phieuNhap->MaNV = $validatedData['MaNV'];
         $phieuNhap->MaSp = $validatedData['MaSp'];
@@ -48,17 +62,14 @@ class PhieuNhapController extends Controller
         $phieuNhap->Dongia = $validatedData['Dongia'];
         $phieuNhap->Ngaylap = $validatedData['Ngaylap'];
         $phieuNhap->SoLuong = $validatedData['SoLuong'];
-
-
+    
         // Gán giá trị cho các thuộc tính khác của $phieunhap tại đây
     
         $phieuNhap->save();
-
-
-        $product = Product::find($validatedData['MaSp']);
+    
         // Cập nhật số lượng sản phẩm
         $product->quantity += $validatedData['SoLuong'];
-
+    
         // Lưu sản phẩm
         $product->save();
     
