@@ -6,6 +6,12 @@
   #wheel {
     display: block;
   }
+  body {
+    background-image: url("/images/food_background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
   
   #spin {
     font: 1.5rem/0 sans-serif;
@@ -39,9 +45,9 @@
   #message {
     position: center;
     right: 45%;
-    top: 100%; /*This will place the top edge of the message box at the bottom of the parent element */
-    transform: translateY(10px); /* Adjust this value to create some space between the wheel and the message box */
-    padding: 10px;
+    top: 100%; 
+    transform: translateY(10px); 
+    padding: 13px;
     background: #fff;
     border: none;
   }
@@ -54,4 +60,3 @@
     justify-content: center; /* This will center #wheelOfFortune horizontally */
     align-items: center; /* This will center #wheelOfFortune vertically */
   }
-  

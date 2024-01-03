@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/wheel.css') }}">
 
-<h1 style="text-align:center;">Nhấn spin để vận mệnh chọn món cho bạn</h1>
+<h1 style="text-align:center;">Nhấn spin để vận mệnh chọn món cho bạn (≧◡≦) </h1>
 <div id="container">
     <div id="wheelOfFortune">
         <canvas id="wheel" width="300" height="300"></canvas>
