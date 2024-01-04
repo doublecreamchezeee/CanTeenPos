@@ -9,12 +9,20 @@
 <p>Nếu bạn cần tìm kiếm món ăn:</p>
 
 <form action="" class="form-inline">
-	<div class="form-group">
+	<div class="form-group mr-3">
     	<input class="form-control input-lg" id="inputlg" name="key" type="text" placeholder="Nhập tên món">
 		<button type="submit" class="btn btn-pdefault">
 			Search
 		</button>
 	</div>
+	<div class="form-group ">
+        <span  class="input-lg mr-3" for="type">Filter by Type</span>
+        <select name="type" id="type" class="form-control" onchange="this.form.submit()">
+            <option value="all" {{ Request::input('type', 'all') == 'all' ? 'selected' : '' }}>All</option>
+            <option value="Food" {{ Request::input('type') == 'Food' ? 'selected' : '' }}>Food</option>
+            <option value="Beverage" {{ Request::input('type') == 'Beverage' ? 'selected' : '' }}>Beverage</option>
+        </select>
+    </div>
 </form>
 
 <br>
@@ -25,6 +33,7 @@
 		<h5>Không tìm thấy món ăn, vui lòng nhập tên khác hoặc trở lại menu để chọn món!</h5>
 	@else
 		@foreach ($products as $product)
+			@if (Request::input('type','all') == 'all' || $product->type == Request::input('type'))
 			<article class="style3">
 				<span class="image">
 					<img src="{{ Storage::url('public/' . $product->image) }}" alt="" />
@@ -60,6 +69,7 @@
 				</a>
 				@endif
 			</article>
+			@endif
 		@endforeach
 		{{ $products->render()}}
 

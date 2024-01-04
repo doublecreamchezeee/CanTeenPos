@@ -64,6 +64,10 @@ Route::prefix('admin')->group(function () {
     Route::delete('/receipts/create/cart/delete/product', [ReceiptController::class, 'delete']);
 
     Route::get('/BaoCao/index', [BaoCaoController::class, 'index'])->name('BaoCao.index');
+    Route::get('/BaoCao/create', [BaoCaoController::class, 'create'])->name('BaoCao.create');
+    Route::get('/BaoCao/edit', [BaoCaoController::class, 'edit'])->name('BaoCao.edit');
+    Route::post('/BaoCao/store', [BaoCaoController::class, 'store'])->name('BaoCao.store');
+    Route::delete('/BaoCao/{id}', [BaoCaoController::class,'destroy'])->name('BaoCao.destroy');
     Route::get('/test/index', [TestController::class, 'index'])->name('test.index');
     // Route::post('/receipt', 'ReceiptController@store')->name('receipt.store');
 
