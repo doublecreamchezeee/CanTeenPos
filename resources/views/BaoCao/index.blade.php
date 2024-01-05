@@ -4,9 +4,8 @@
 @section('content-header','Danh sách Phiếu Báo Cáo')
 
 @section('content-actions')
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPhieuBaoCaoModal">Thêm Phiếu Báo Cáo</button>
+    <a href="{{route('BaoCao.create')}}" class="btn btn-primary">Thêm Báo Cáo</a>
 @endsection
-
 @section('styles')
     <link rel="stylesheet" href="{{asset('plugins/sweetalert2/sweetalert2.min.css')}}"> 
 @endsection
@@ -36,7 +35,13 @@
                     <td>{{$baoCao->TongDoanhThu}}</td>
                     <!-- Thêm nút thao tác hoặc xem chi tiết tại đây -->
                     <td>
-                        <!-- Thêm các nút hoặc thao tác cho Phiếu Báo Cáo -->
+                        <a href="{{ route('BaoCao.show', $baoCao->id) }}" class="btn btn-primary">Xem</a>
+                        <a href="{{ route('BaoCao.edit', $baoCao->id) }}" class="btn btn-warning">Cập Nhập Báo Cáo</a>
+                        <form action="{{ route('BaoCao.destroy', $baoCao->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
