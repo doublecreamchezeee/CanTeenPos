@@ -44,8 +44,10 @@ class BaoCaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BaoCao $baoCao)
+    public function show($id)
     {
+        $baoCao = BaoCao::findOrFail($id);
+        return view('baoCao.show', compact('baoCao'));
     }
 
     /**
