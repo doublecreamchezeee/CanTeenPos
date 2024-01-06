@@ -149,8 +149,8 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <p class="d-flex flex-column">
-                                        <span class="text-bold text-lg">2.000.000 VND</span>
-                                        <span>Doanh thu</span>
+                                        <span class="text-bold text-lg">{{$revenue->TongDoanhThu}} VND</span>
+                                        <span>Doanh thu gần nhất</span>
                                     </p>
                                     <p class="ml-auto d-flex flex-column text-right">
                                         <span class="text-success">
