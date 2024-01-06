@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title','Product List')
-@section('content-header','Product List')
+@section('title','Danh sách món ăn')
+@section('content-header','Danh sách món ăn')
 
 
 @section('content-actions')
-<a href="{{route('products.create')}}" class="btn btn-primary">Create</a>
+<a href="{{route('products.create')}}" class="btn btn-primary">Tạo món ăn</a>
 @endsection
 
 @section('styles')

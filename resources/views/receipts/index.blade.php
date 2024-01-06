@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title','Receipt List')
-@section('content-header','Receipt List')
+@section('title','Danh sách hóa đơn')
+@section('content-header','Danh sách hóa đơn')
 
 
 @section('content-actions')
@@ -19,12 +19,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Total cost</th>
-                    <th>List product</th>
-                    <th>Payment type</th>
-                    <th>Status</th>
-                    <th>Created At</th>
+                    <th>Mã Hóa Đơn</th>
+                    <th>Tổng tiền</th>
+                    {{-- <th>List product</th> --}}
+                    <th>Hình thức thanh toán</th>
+                    <th>Trạng thái</th>
+                    <th>Thời gian tạo</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{$receipt->id}}</td>
                     <td>{{$receipt->total_cost}}</td>
-                    <td></td>
+                    {{-- <td></td> --}}
                     <td>{{$receipt->payment_type}}</td>
 
                     <td>
