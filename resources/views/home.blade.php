@@ -122,7 +122,7 @@
                                                     @else
                                                         <small class="text-muted">N/A</small>
                                                     @endif
-                                                    {{ $product->total_quantity }} Sold
+                                                    {{ $product->total_quantity }} Đã bán
                                                 </td>
                                                 <td>
                                                     <a href="#" class="text-muted">
